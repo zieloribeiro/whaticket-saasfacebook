@@ -4,16 +4,14 @@ import { hash } from "bcryptjs";
 module.exports = {
   up: (queryInterface: QueryInterface) => {
     return queryInterface.sequelize.transaction(async t => {
-      const passwordHash = await hash("123456", 8);
-      return Promise.all([
-        queryInterface.bulkInsert(
+        return queryInterface.bulkInsert(queryInterface.bulkInsert(
           "Users",
           [
             {
               name: "Admin",
               email: "admin@admin.com",
               profile: "admin",
-              passwordHash,
+              passwordHash: "admin"
               companyId: 1,
               createdAt: new Date(),
               updatedAt: new Date(),
